@@ -1,0 +1,28 @@
+{
+  "name": "mongo-collection-sync",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wsierakowski/mongo-collection-sync.git"
+  },
+  "author": "sigman.pl",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wsierakowski/mongo-collection-sync/issues"
+  },
+  "homepage": "https://github.com/wsierakowski/mongo-collection-sync",
+  "dependencies": {
+    "commander": "^2.8.1",
+    "mongodb": "^2.0.40",
+    "underscore": "^1.8.3"
+  },
+  "preferGlobal": true,
+  "bin": {
+    "mongo-collection-sync": "index.js"
+  }
+}
