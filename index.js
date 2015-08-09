@@ -1,23 +1,9 @@
 #!/usr/bin/env node
 
-/*
-Export values:
-db name: sigman-pl
-collection name: posts
-field(s) to be exported: hits
-key field(s) to be referenced: _id
-
-exported:
-{
-  db: ‘sigman-pl’,
-  collection: ‘posts’,
-  data: [{ref: {_id: ‘abc’}, data: {hits: 123}}]
-}
- */
-
 var program = require('commander'),
     path = require('path'),
     pkg = require( path.join(__dirname, 'package.json') ),
+
     sync = require('./src/mongo-collection-sync.js');
 
 function list(val) {
@@ -48,31 +34,140 @@ program
 
 if (!program.import && !program.export || program.import && program.export) {
   console.log("error: are you going to import or export?");
-  return program.help();
+  program.help();
+  return process.exit(1);
 }
 
 if (program.import) {
-  console.log('Starting importing process...');
+  doImport();
 } else if (program.export) {
+  doExport();
+}
 
-  if (!program.database || !program.database.length) {
+//module.exports = require('./src/mongo-collection-sync');
+
+function doImport() {
+
+  // Source stdin
+  var stdin = process.stdin,
+      stdout = process.stdout,
+      inputChunks = [],
+      inputJoined, inputObj;
+
+  stdin.setEncoding('utf8');
+  stdin.resume();
+  stdin.on('data', function(data) {
+    inputChunks.push(data);
+  });
+
+  stdin.on('end', function() {
+    inputJoined = inputChunks.join();
+    inputObj = JSON.parse(inputJoined);
+    parseInput(inputObj);
+  });
+
+  function parseInput(inputObj) {
+    var input = {};
+    
+    if (!inputObj.database && !(program.database && program.database.length)) {
+      console.log("error: database name is required for import.");
+      program.help();
+      return process.exit(1);
+    }
+    input.database = program.database || inputObj.database;
+
+    if (!inputObj.collection && !(program.collection && program.collection.length)) {
+      console.log("error: collection name is required for import.");
+      program.help();
+      return process.exit(1);
+    }
+    input.collection = program.collection || inputObj.collection;
+
+    if (!inputObj.keyPaths && !(program.keys && program.keys.length)) {
+      console.log("error: keys are required for import.");
+      program.help();
+      return process.exit(1);
+    }
+    input.keys = program.keys || inputObj.keyPaths;
+
+    if (!inputObj.fieldPaths && !(program.fields && program.fields.length)) {
+      console.log("error: fields are required for import.");
+      program.help();
+      return process.exit(1);
+    }
+    input.fields = program.fields || inputObj.fieldPaths;
+
+    if (!inputObj.data) {
+      console.log("error: missing the data in the input feed.");
+      return process.exit(1);
+    }
+    input.data = inputObj.data;
+
+    // validate if data has all keys and fields specified
+    var keysTest = input.keys.every(function(ikey) {
+      return input.data.every(function(dkey) {
+        return dkey[ikey] !== undefined && dkey[ikey] !== null;
+      });
+    });
+
+    if (!keysTest) {
+      console.log("error: missing keys in the data in the input feed.");
+      return process.exit(1);
+    }
+
+    var fieldsTest = input.fields.every(function(ifield) {
+      return input.data.every(function(dfield) {
+        return dfield[ifield] !== undefined && dfield[ifield] !== null;
+      });
+    });
+
+    if (!fieldsTest) {
+      console.log("error: missing fields in the data in the input feed.");
+      return process.exit(1);
+    }
+
+    sync.importData({
+      hostname: process.hostname,
+      port: process.port,
+      database: input.database,
+      collection: input.collection,
+      keyPaths: input.keys,
+      fieldPaths: input.fields,
+      data: input.data
+    }, function(err, log){
+      if (err) return console.log('DB error:', err);
+      console.log(log);
+      process.exit(0);
+    });
+  }
+
+  // console.log('Starting exporting process for database "%s" for collection "%s" for the key values: "%s" and export fields: "%s".',
+  //  program.database, program.collection, program.keys.join(', '), program.fields.join(', '));
+}
+
+function doExport() {
+  if (!program.database && !program.database.length) {
     console.log("error: database name is required for export.");
-    return program.help();
+    program.help();
+    return process.exit(1);
   }
 
-  if (!program.collection || !program.collection.length) {
+  if (!program.collection && !program.collection.length) {
     console.log("error: collection name is required for export.");
-    return program.help();
+    program.help();
+    return process.exit(1);
   }
 
-  if (!program.keys || !program.keys.length) {
+  if (!program.keys && !program.keys.length) {
     console.log("error: keys are required for export.");
-    return program.help();
+    program.help();
+    return process.exit(1);
   }
 
-  if (!program.fields || !program.fields.length) {
+  if (!program.fields && !program.fields.length) {
     console.log("error: fields are required for export.");
-    return program.help();
+    program.help();
+    return process.exit(1);
   }
 
   // console.log('Starting exporting process for database "%s" for collection "%s" for the key values: "%s" and export fields: "%s".',
@@ -87,9 +182,7 @@ if (program.import) {
     fieldPaths: program.fields
   }, function(err, data){
     if (err) return console.log('DB error:', err);
-    console.log(JSON.stringify(data));
+    console.log(JSON.stringify(data, null, 4));
     process.exit(0);
   });
 }
-
-//module.exports = require('./src/mongo-collection-sync');

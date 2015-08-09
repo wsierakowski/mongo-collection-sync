@@ -1,1 +1,56 @@
-{"database":"sigman-pl","collection":"posts","keyPaths":["_id"],"fieldPaths":["hits"],"data":[{"_id":"55af9f1c8fb1260489f3050b","hits":824},{"_id":"55afca098fb1260489f30510","hits":6431},{"_id":"55afd6688fb1260489f30513","hits":399},{"_id":"55b0aafe8fb1260489f30516","hits":46994},{"_id":"55afc5648fb1260489f3050e","hits":2889},{"_id":"55afd2af8fb1260489f30511","hits":2478},{"_id":"55afd4b48fb1260489f30512","hits":28379},{"_id":"55afd96c8fb1260489f30514","hits":8043},{"_id":"55b1e87fdcaa979a97c5ecea","hits":832},{"_id":"55b248c4529fa36fa1cc3fa8","hits":1736},{"_id":"55b0a5a88fb1260489f30515","hits":40653}]}
+{
+    "database": "sigman-pl",
+    "collection": "posts",
+    "keyPaths": [
+        "_id"
+    ],
+    "fieldPaths": [
+        "hits"
+    ],
+    "data": [
+        {
+            "_id": "55af9f1c8fb1260489f3050b",
+            "hits": 824
+        },
+        {
+            "_id": "55afca098fb1260489f30510",
+            "hits": 6431
+        },
+        {
+            "_id": "55afd6688fb1260489f30513",
+            "hits": 399
+        },
+        {
+            "_id": "55b0aafe8fb1260489f30516",
+            "hits": 46994
+        },
+        {
+            "_id": "55afc5648fb1260489f3050e",
+            "hits": 2889
+        },
+        {
+            "_id": "55afd2af8fb1260489f30511",
+            "hits": 2478
+        },
+        {
+            "_id": "55afd4b48fb1260489f30512",
+            "hits": 28379
+        },
+        {
+            "_id": "55afd96c8fb1260489f30514",
+            "hits": 8043
+        },
+        {
+            "_id": "55b1e87fdcaa979a97c5ecea",
+            "hits": 832
+        },
+        {
+            "_id": "55b248c4529fa36fa1cc3fa8",
+            "hits": 1736
+        },
+        {
+            "_id": "55b0a5a88fb1260489f30515",
+            "hits": 40653
+        }
+    ]
+}
