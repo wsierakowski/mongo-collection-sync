@@ -2,55 +2,79 @@
     "database": "sigman-pl",
     "collection": "posts",
     "keyPaths": [
-        "_id"
+        "_id",
+        "title"
     ],
     "fieldPaths": [
-        "hits"
+        "hits",
+        "slug"
     ],
     "data": [
         {
             "_id": "55af9f1c8fb1260489f3050b",
-            "hits": 824
+            "hits": 9824,
+            "slug": "9using-modules-and-dependency-management-in-javascript-applications-with-amd-require-js",
+            "title": "Using modules and dependency management in JavaScript applications with AMD - require.js"
         },
         {
             "_id": "55afca098fb1260489f30510",
-            "hits": 6431
+            "hits": 96431,
+            "slug": "9box-2-d-basics-part-1",
+            "title": "Box2D basics - Part 1"
         },
         {
             "_id": "55afd6688fb1260489f30513",
-            "hits": 399
+            "hits": 9399,
+            "slug": "9getting-certificates-and-provisioning-profiles-for-ios-on-windows",
+            "title": "Getting certificates and provisioning profiles for iOS on Windows"
         },
         {
             "_id": "55b0aafe8fb1260489f30516",
-            "hits": 46994
+            "hits": 946994,
+            "slug": "9starting-with-air-for-android-and-ios-building-one-app-for-both-platforms",
+            "title": "Starting with AIR for Android and iOS - building one app for both platforms"
         },
         {
             "_id": "55afc5648fb1260489f3050e",
-            "hits": 2889
+            "hits": 92889,
+            "slug": "9agal-multitexture-shader",
+            "title": "AGAL multitexture shader"
         },
         {
             "_id": "55afd2af8fb1260489f30511",
-            "hits": 2478
+            "hits": 92478,
+            "slug": "9saving-and-loading-complex-objects-from-a-file-with-flashplayer",
+            "title": "Saving and loading complex objects from a file with FlashPlayer"
         },
         {
             "_id": "55afd4b48fb1260489f30512",
-            "hits": 28379
+            "hits": 928379,
+            "slug": "9building-ios-app-with-adobe-air-things-learnt-when-developing-colorbyshape-app",
+            "title": "Building iOS app with Adobe AIR - things learnt when developing ColorByShape app"
         },
         {
             "_id": "55afd96c8fb1260489f30514",
-            "hits": 8043
+            "hits": 98043,
+            "slug": "9simple-pathfinding-algorithm-in-actionscript-3",
+            "title": "Simple pathfinding algorithm in ActionScript 3"
         },
         {
             "_id": "55b1e87fdcaa979a97c5ecea",
-            "hits": 832
+            "hits": 9832,
+            "slug": "9markdown-basics",
+            "title": "Markdown basics"
         },
         {
             "_id": "55b248c4529fa36fa1cc3fa8",
-            "hits": 1736
+            "hits": 91736,
+            "slug": "9linux-basics",
+            "title": "Linux basics"
         },
         {
             "_id": "55b0a5a88fb1260489f30515",
-            "hits": 40653
+            "hits": 940653,
+            "slug": "9building-mobile-games-in-adobe-air-techniques-used-in-jumping-droid",
+            "title": "Building mobile games in Adobe AIR - techniques used in Jumping Droid"
         }
     ]
 }

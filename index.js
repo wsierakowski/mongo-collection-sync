@@ -25,9 +25,12 @@ program
   .option('-f, --fields <items>',
     'List of fields to export. Required for export, optional for import (overrides import feed value).', list)
   .on('--help', function() {
-    console.log('  Examples:\n');
-    console.log('    $ mongo-collection-sync --export --database sigman-pl --collection posts --keys _id --fields hits > out.json;');
-    console.log('    $ mongo-collection-sync --export --database sigman-pl --collection posts --keys _id,slug --fields hits,title > out.json;');
+    console.log('  Export examples:\n');
+    console.log('    $ mongo-collection-sync --export --database sigman-pl --collection posts --keys _id --fields hits > out.json');
+    console.log('    $ mongo-collection-sync --export -d sigman-pl -c posts -k _id,slug -f hits,title > out.json');
+    console.log('');
+    console.log('  Import examples:\n');
+    console.log('    $ cat out.json | mongo-collection-sync --import');
     console.log('');
   })
   .parse(process.argv);
@@ -146,25 +149,25 @@ function doImport() {
 }
 
 function doExport() {
-  if (!program.database && !program.database.length) {
+  if (!(program.database && program.database.length)) {
     console.log("error: database name is required for export.");
     program.help();
     return process.exit(1);
   }
 
-  if (!program.collection && !program.collection.length) {
+  if (!(program.collection && program.collection.length)) {
     console.log("error: collection name is required for export.");
     program.help();
     return process.exit(1);
   }
 
-  if (!program.keys && !program.keys.length) {
+  if (!(program.keys && program.keys.length)) {
     console.log("error: keys are required for export.");
     program.help();
     return process.exit(1);
   }
 
-  if (!program.fields && !program.fields.length) {
+  if (!(program.fields && program.fields.length)) {
     console.log("error: fields are required for export.");
     program.help();
     return process.exit(1);
